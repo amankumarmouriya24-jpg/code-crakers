@@ -1,0 +1,48 @@
+[project]
+name = "code-crakers"
+version = "1.0.2"
+description = "A Flask budget trip planner for affordable destination, hotel, transport, and itinerary recommendations."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "AGPL-3.0-or-later"
+dependencies = ["Flask==3.0.3"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+
+[tool.mypy]
+python_version = "3.10"
+ignore_missing_imports = true
+check_untyped_defs = true
+
+[tool.vulture]
+paths = ["app.py", "tests"]
+min_confidence = 80
+
+[tool.bandit]
+exclude_dirs = ["tests", ".venv", "venv"]
+skips = []
+
+[tool.pylint.main]
+ignore = [".venv", "venv"]
+disable = ["missing-module-docstring", "missing-function-docstring"]
+
+[tool.flake8]
+max-line-length = 100
+extend-ignore = ["E203", "W503"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=app --cov-report=term-missing --cov-fail-under=60"
+
+[tool.coverage.run]
+branch = true
+source = ["app"]
+
+[tool.coverage.report]
+fail_under = 60
+show_missing = true
